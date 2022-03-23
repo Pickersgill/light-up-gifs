@@ -49,7 +49,7 @@ if args.black is not None:
 else:
     BLACK_IMG = "./black.png"
 
-UNIT = 100
+UNIT = 50
 LIGHT = "rgba(252, 186, 3, 55)"
 
 def make_gif():
@@ -76,11 +76,13 @@ def make_gif():
 
         img_seq += light_imgs
 
-    lit_up = np.sum([[min(1, n) for n in k] for k in lit]) + len(blacks) < lit.shape[0]
+    lit_up = np.sum([[min(1, n) for n in k] for k in lit]) + len(blacks) >= lit.shape[0]
     overlaps = len(set(bulbs).intersection(set(blacks))) > 0
     if not lit_up or overlaps:
         print("Looks like the plan you gave doesn't solve the accompanied problem. \
                \nMake sure a valid plan was found. The resulting gif might look very weird...")
+    
+    img_seq += [img_seq[-1]] * 10
     
     return img_seq
 
@@ -139,6 +141,6 @@ def get_light_map(lit, light_val, UNIT=100):
 
 if __name__ == "__main__":
     imgs = make_gif()    
-    imgs[0].save("./plan.gif", save_all=True, append_images=imgs[1:], duration=100, loop=1)
+    imgs[0].save(args.output, save_all=True, append_images=imgs[1:], duration=100, loop=0)
 
 

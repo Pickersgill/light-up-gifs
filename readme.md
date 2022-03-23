@@ -24,6 +24,9 @@ the name of the action in your domain file must be 'light-up' with an xpos and y
 Designed for use with Python 3.8.
 For usage help use ```python3.8 gifi.py -h```
 
+I know this is lazy, but there are some variables in the ```gifi.py``` file (UNIT and LIGHT) that change
+the grid square size and colour of the light propogation. 
+
 If anything breaks, feel free to post an issue or contact me.
 
 

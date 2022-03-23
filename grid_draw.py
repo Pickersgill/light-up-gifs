@@ -5,8 +5,8 @@ import re
 
 def get_gs_from_src(src):
     pos_nums = []
-    for xy in re.findall(r"[XY](\d) - [xy]pos", src):
-        pos_nums.append(int(xy[0]))
+    for xy in re.findall(r"[XY](\d+) - [xy]pos", src):
+        pos_nums.append(int(xy))
 
     return max(pos_nums) + 1
 
@@ -14,12 +14,12 @@ def get_blacks_from_src(src):
     surrounds = {}
     blacks = []
 
-    for surr in re.findall(r"\(surrounded X(\d) Y(\d) N(\d)\)", src):
+    for surr in re.findall(r"\(surrounded X(\d+) Y(\d+) N(\d+)\)", src):
         s0 = int(surr[0])
         s1 = int(surr[1])
         surrounds[(s0, s1)] = surr[2]
     
-    for black in re.findall(r"\(black X(\d) Y(\d)\)", src):
+    for black in re.findall(r"\(black X(\d+) Y(\d+)\)", src):
         b0 = int(black[0])
         b1 = int(black[1])
         blacks.append((b0, b1))
@@ -28,7 +28,7 @@ def get_blacks_from_src(src):
     
 def get_bulbs_from_plan(plan):
     bulbs = []
-    for bulb in re.findall(r"\(light-up x(\d) y(\d)\)", plan):
+    for bulb in re.findall(r"\(light-up x(\d+) y(\d+)\)", plan):
         bulbs.append((int(bulb[0]), int(bulb[1])))
     
     return bulbs
